@@ -16,6 +16,8 @@ export default function SignupForm() {
                 <Text style={{marginBottom: 10}}>Prénom</Text>
                 <TextInput
                     style={styles.input}
+                    name="firstname"
+                    value=""
                     placeholder={"Ex. John"}
                     onChangeText={(text) => setFirstname(text)}
                 />
@@ -24,6 +26,8 @@ export default function SignupForm() {
             <Text style={{marginBottom: 10}}>Nom</Text>
             <TextInput
                 style={styles.input}
+                name="lastname"
+                value=""
                 placeholder={"Ex. Doe"}   
                 onChangeText={(text) => setLastname(text)}
             />
@@ -32,6 +36,8 @@ export default function SignupForm() {
             <Text style={{marginBottom: 10}}>Email</Text>
             <TextInput
                 style={styles.input}
+                name="mail"
+                value=""
                 placeholder={"Ex. john.doe@gmail.com"}
                 onChangeText={(text) => setEmail(text)}
                 autoCapitalize={"none"}
