@@ -1,7 +1,7 @@
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 
-export default function signupForm() {
+export default function SignupForm() {
     const [email, setEmail] = useState('');
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
@@ -37,7 +37,7 @@ export default function signupForm() {
                 autoCapitalize={"none"}
             />
       </View>
-      <Button title={"Sign Up"} onPress={() => {}} />
+      <Button title={"S'inscrire"} onPress={() => {}} />
     </View>
   )
 };
