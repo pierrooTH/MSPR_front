@@ -1,7 +1,7 @@
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 
-export default function SignupForm() {
+export default function SignupForm({ navigation }) {
     const [email, setEmail] = useState('');
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
@@ -43,7 +43,7 @@ export default function SignupForm() {
                 autoCapitalize={"none"}
             />
       </View>
-      <Button title={"S'inscrire"} onPress={() => {}} />
+      <Button title={"S'inscrire"} onPress={() => navigation.navigate('QrCode')} />
     </View>
   )
 };
