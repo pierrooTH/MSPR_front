@@ -25,6 +25,14 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-barcode-scanner",
+        {
+          "cameraPermission": "Permettre a Paye ton Kawa d'accéder à la caméra"
+        }
+      ]
+    ]
   }
 }
