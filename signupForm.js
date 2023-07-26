@@ -1,10 +1,29 @@
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native'
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native'
 import React, { useState } from 'react'
+import axios from 'axios';
 
 export default function SignupForm({ navigation }) {
     const [email, setEmail] = useState('');
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
+
+    const submitBtn = async () => {
+      try {
+        const response = await axios.post('http://192.168.1.14:4000/users', {
+        email: email,
+        firstname: firstname,
+        lastname: lastname
+      });
+
+      if (response.status === 201) {
+        navigation.navigate('QrCode');
+      } else {
+        Alert.alert('Erreur!')
+      }
+      } catch (e) {
+        Alert.alert(e.message)
+      }
+    }
 
   return (
     <View style={{marginTop: 50, padding: 20}}>
@@ -17,7 +36,7 @@ export default function SignupForm({ navigation }) {
                 <TextInput
                     style={styles.input}
                     name="firstname"
-                    value=""
+                    value={firstname}
                     placeholder={"Ex. John"}
                     onChangeText={(text) => setFirstname(text)}
                 />
@@ -27,7 +46,7 @@ export default function SignupForm({ navigation }) {
             <TextInput
                 style={styles.input}
                 name="lastname"
-                value=""
+              value={lastname}
                 placeholder={"Ex. Doe"}   
                 onChangeText={(text) => setLastname(text)}
             />
@@ -37,13 +56,13 @@ export default function SignupForm({ navigation }) {
             <TextInput
                 style={styles.input}
                 name="mail"
-                value=""
+    value={email}
                 placeholder={"Ex. john.doe@gmail.com"}
                 onChangeText={(text) => setEmail(text)}
                 autoCapitalize={"none"}
             />
       </View>
-      <Button title={"S'inscrire"} onPress={() => navigation.navigate('QrCode')} />
+      <Button title={"S'inscrire"} onPress={submitBtn} />
     </View>
   )
 };
