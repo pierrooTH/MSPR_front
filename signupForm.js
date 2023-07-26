@@ -16,7 +16,7 @@ export default function SignupForm({ navigation }) {
       });
 
       if (response.status === 201) {
-        navigation.navigate('QrCode');
+        navigation.navigate('QrCode', {email: email});
       } else {
         Alert.alert('Erreur!')
       }

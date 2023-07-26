@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet, Button, Alert } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import axios from 'axios';
 
-export default function QrCode({navigation}) {
+export default function QrCode({navigation, route}) {
+  const {email} = route.params;
     const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
@@ -17,8 +19,11 @@ export default function QrCode({navigation}) {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    navigation.navigate('Product', { token: data });
-    //alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    axios.post('http://192.168.1.14:4000/auth', {email: email, token: data}).then(res => {
+      if (res.status === 201) {
+        navigation.navigate('Product', { token: data, email: email });
+      }
+    }).catch(e => Alert.alert(e.message))
   };
 
   if (hasPermission === null) {

@@ -4,12 +4,13 @@ import axios from 'axios';
 
 export default function ProductScreen({route, navigation}) {
     const [dataProduct, setDataProduct] = useState([])
-    const {token} = route.params;
+    const {token, email} = route.params;
 
 const productData = async () => {
   try {
     const response = await axios.get("http://192.168.1.14:4000/products", {
       headers: {
+        'token': token,
         'Cache-Control': 'no-cache',
         'Pragma': 'no-cache',
       },
