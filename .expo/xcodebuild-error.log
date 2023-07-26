@@ -1,0 +1,10 @@
+2023-07-25 17:20:10.135 xcodebuild[16174:791601] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, id:B51D8AE6-201F-4DC8-ADA6-D92549AAEFFF, OS:16.4, name:iPhone 14 Pro Max }
+{ platform:iOS Simulator, id:B51D8AE6-201F-4DC8-ADA6-D92549AAEFFF, OS:16.4, name:iPhone 14 Pro Max }
+** BUILD FAILED **
+
+
+The following build commands failed:
+	SwiftEmitModule normal x86_64 Emitting\ module\ for\ PayeTonKawaFront (in target 'PayeTonKawaFront' from project 'PayeTonKawaFront')
+(1 failure)

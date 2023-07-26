@@ -53,5 +53,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>Permettre Paye ton kawa d'utiliser la caméra</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Permettre Paye ton kawa d'utiliser le microphone</string>
 </dict>
 </plist>

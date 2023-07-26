@@ -11,7 +11,7 @@ export default function SignupForm({ navigation }) {
 
       <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 40}}>Paye ton Kawa!</Text>
       <View style={{marginTop: 10, display: 'flex', flexDirection: 'column'}}>
-        <View style={{display: 'flex', flexDirection: 'row', gap: '10px', width: '100%'}}>
+        <View style={{display: 'flex', flexDirection: 'row', width: '100%'}}>
             <View style={{ width: '49%'}}>
                 <Text style={{marginBottom: 10}}>Prénom</Text>
                 <TextInput

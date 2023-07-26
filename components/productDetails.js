@@ -1,7 +1,7 @@
 import { View, Text, Button } from 'react-native'
 import React from 'react'
 
-export default function ProductDetails({route}) {
+export default function ProductDetails({route, navigation}) {
     const {name, id, details, stock} = route.params
   return (
     <View style={{flex: 1, padding: 20}}>
@@ -12,7 +12,7 @@ export default function ProductDetails({route}) {
               <Text style={{lineHeight: 20, marginBottom: 10}}>{stock} products in stock</Text>
               <Text style={{lineHeight: 20, fontSize: 20}}>{details.price.split('.')[0]}$</Text>
 
-        <Button title='Réalité augmentée du produit' />
+        <Button title='Réalité augmentée du produit' onPress={() => navigation.navigate('AR')} />
     </View>
   )
 }

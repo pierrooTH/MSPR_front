@@ -4,11 +4,11 @@ import axios from 'axios';
 
 export default function ProductScreen({route, navigation}) {
     const [dataProduct, setDataProduct] = useState([])
-    //const {token} = route.params;
+    const {token} = route.params;
 
 const productData = async () => {
   try {
-    const response = await axios.get("http://10.60.12.21:4000/products", {
+    const response = await axios.get("http://192.168.1.14:4000/products", {
       headers: {
         'Cache-Control': 'no-cache',
         'Pragma': 'no-cache',
@@ -57,7 +57,7 @@ const Item = ({name, details, id, stock}) => (
     if (dataProduct.length > 0) {
       return (
         <View>
-          {/* <Text>{token}</Text> */}
+          <Text>{token}</Text>
           <ScrollView>
           {dataPr}
           </ScrollView>

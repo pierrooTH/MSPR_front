@@ -1,27 +1,26 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {View, StyleSheet, Text} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import RNFS from 'react-native-fs';
 import {ArViewerView} from 'react-native-ar-viewer';
 
-const App = () => {
-  const [localModelPath, setLocalModelPath] = useState<any[]>([]);
+export default function ARProduct() {
+  const [localModelPath, setLocalModelPath] = useState([]);
 
   const modelLinks = [
-    'https://github.com/pierrooTH/MSPR_front/raw/develop/machineend.usdc',
-    // 'https://github.com/nainglynndw/react-native-ar-viewer/releases/download/v1/Elk_Free.usdz',
+    //'https://github.com/pierrooTH/MSPR_front/raw/develop/machineend.usdc',
+    'https://github.com/nainglynndw/react-native-ar-viewer/releases/download/v1/Elk_Free.usdz',
   ];
 
-  const getFileName = (url: string): string => {
+  const getFileName = (url) => {
     const arr = url.split('/');
     const fileName = arr[arr.length - 1];
     return fileName;
   };
 
-  const checkModelExisted = (url: string) => {
+  const checkModelExisted = (url) => {
     const fileName = getFileName(url);
     const localPath = `${RNFS.DocumentDirectoryPath}/${fileName}`;
-    console.log("DOWNLOADING")
+    console.log('DOWNLOADING');
     RNFS.exists(localPath).then(res => {
       if (!res) {
         downloadModels(url, localPath);
@@ -35,7 +34,7 @@ const App = () => {
 
   console.log(localModelPath.length);
 
-  const downloadModels = async (url: string, localPath: string) => {
+  const downloadModels = async function(url, localPath) {
     await RNFS.downloadFile({
       fromUrl: url,
       toFile: localPath,
@@ -71,8 +70,6 @@ const App = () => {
     </View>
   );
 };
-
-export default App;
 
 const styles = StyleSheet.create({
   container: {
