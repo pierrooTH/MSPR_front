@@ -44,11 +44,10 @@ const Item = ({name, details, id, stock}) => (
               <View style={{backgroundColor: '#fff', borderRadius: 5, margin: 10, padding: 20, }} key={d.id}>
 
               <Text style={{lineHeight: 20, fontWeight: 'bold', fontSize: 20, marginBottom: 10}}>{d.name}</Text>
-              <Text style={{lineHeight: 20, marginBottom: 10}}>{d.details.description}</Text>
-              
+              <Text style={{lineHeight: 20, marginBottom: 10}}>{d.description}</Text>
               <Text style={{lineHeight: 20, marginBottom: 10}}>{d.stock} products in stock</Text>
-              <Text style={{lineHeight: 20, fontSize: 20}}>{d.details.price.split('.')[0]}$</Text>
-              <Button title='GO' onPress={() => navigation.navigate("Details", {name: d.name, id: d.id, details: d.details, stock: d.stock})}>
+              <Text style={{lineHeight: 20, fontSize: 20}}>{d.price.split('.')[0]}$</Text>
+              <Button title='GO' onPress={() => navigation.navigate("Details", {name: d.name, id: d.id, description: d.description, stock: d.stock, price: d.price})}>
               </Button>
               </View>
            
