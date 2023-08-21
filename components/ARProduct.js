@@ -7,8 +7,7 @@ export default function ARProduct() {
   const [localModelPath, setLocalModelPath] = useState([]);
 
   const modelLinks = [
-    //'https://github.com/pierrooTH/MSPR_front/raw/develop/machineend.usdc',
-    'https://github.com/nainglynndw/react-native-ar-viewer/releases/download/v1/Elk_Free.usdz',
+    'https://github.com/pierrooTH/MSPR_front/blob/react-native-ar/cafe.usdz',
   ];
 
   const getFileName = (url) => {

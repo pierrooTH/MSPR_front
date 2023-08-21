@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>TestingApp</string>
+	<string>PayeTonKawa</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -36,7 +36,7 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>The app needs camera aceess to use AR.</string>
+	<string>Permettre Paye ton kawa d&apos;utiliser la caméra</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>UILaunchStoryboardName</key>
@@ -53,9 +53,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSCameraUsageDescription</key>
-	<string>Permettre Paye ton kawa d'utiliser la caméra</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Permettre Paye ton kawa d'utiliser le microphone</string>
+	<string>Permettre Paye ton kawa d&apos;utiliser le microphone</string>
 </dict>
 </plist>
