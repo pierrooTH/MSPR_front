@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
+    "@testing-library/react-native": "^12.2.2",
     "axios": "^1.4.0",
     "expo": "^49.0.5",
     "expo-barcode-scanner": "^12.5.3",

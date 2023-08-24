@@ -1,24 +1,34 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-
+import {render, fireEvent} from '@testing-library/react-native';
 import SignupForm from './signupForm';
 
 describe('<SignupForm />', () => {
   it('has 1 child', () => {
-    const component = renderer.create(<SignupForm />);
-    const tree = component.toJSON();
+    const {toJSON} = render(<SignupForm />);
+    const tree = toJSON();
     expect(tree.children.length).toBe(3);
   });
 
   it('input fields are empty by default', () => {
-    const component = renderer.create(<SignupForm />);
-    const usernameInput = component.root.findByProps({ name: 'firstname' });
-    const emailInput = component.root.findByProps({ name: 'lastname' });
-    const passwordInput = component.root.findByProps({ name: 'mail' });
+    const {getByTestId} = render(<SignupForm />);
+    const usernameInput = getByTestId('firstname-input');
+    const emailInput = getByTestId('lastname-input');
+    const passwordInput = getByTestId('mail-input');
 
     expect(usernameInput.props.value).toBe('');
     expect(emailInput.props.value).toBe('');
     expect(passwordInput.props.value).toBe('');
   });
-});
 
+  it('cannot submit the form if all fields are not filled', () => {
+    const {getByTestId} = render(<SignupForm />);
+    const submitButton = getByTestId('submit-button'); // Récupère le bouton par son testID
+
+    fireEvent.press(submitButton);
+
+    const errorMessage = getByTestId('error-message');
+    expect(errorMessage.props.children).toBe(
+      'Veuillez remplir tous les champs.',
+    );
+  });
+});
