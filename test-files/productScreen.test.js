@@ -1,7 +1,7 @@
 import React from 'react';
 import {render, waitFor} from '@testing-library/react-native';
 import axios from 'axios';
-import ProductScreen from '../productScreen'; // Assurez-vous que le chemin d'importation est correct
+import ProductScreen from '../productScreen';
 
 jest.mock('axios'); // Mock axios pour simuler les requêtes
 
