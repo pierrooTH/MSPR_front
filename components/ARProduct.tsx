@@ -12,9 +12,9 @@ export default function App() {
     const modelSrc =
       Platform.OS === 'android'
         ? 'https://github.com/riderodd/react-native-ar/blob/main/example/src/dice.glb?raw=true'
-        : 'https://github.com/pierrooTH/MSPR_front/raw/develop/3DModels/Coffee_maker.usdz';
-    const modelPath = `${RNFS.DocumentDirectoryPath}/${getFileName(modelSrc)}.${
-      Platform.OS === 'android' ? 'glb' : 'usdz'
+        : 'https://github.com/pierrooTH/MSPR_front/raw/develop/3DModels/Cafetiere1.usdc';
+    const modelPath = `${RNFS.DocumentDirectoryPath}/${ getFileName(modelSrc) }.${
+      Platform.OS === 'android' ? 'glb' : 'usdc'
     }`;
     const exists = await RNFS.exists(modelPath);
     console.log(modelPath);
