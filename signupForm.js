@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, Button, StyleSheet, Alert} from 'react-native';
+import {View, Text, TextInput, Button, StyleSheet, Alert, Image, TouchableOpacity} from 'react-native';
 import axios from 'axios';
 
 export default function SignupForm({navigation}) {
@@ -16,7 +16,7 @@ export default function SignupForm({navigation}) {
         return;
       }
 
-      const response = await axios.post('http://192.168.1.15:4000/users', {
+      const response = await axios.post('http://192.168.1.14:4000/users', {
         email: email,
         firstname: firstname,
         lastname: lastname,
@@ -34,11 +34,17 @@ export default function SignupForm({navigation}) {
   };
 
   return (
-    <View style={{marginTop: 50, padding: 20}}>
-      <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 40}}>
+    <View style={{ padding: 20, backgroundColor: '#5C4F2D', flex:1}}>
+      <View style={{marginTop: 50}}>
+       <Image
+        style={styles.img}
+        source={require('./assets/logo_payetonkawa-5.png')}
+      />
+      <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 40, color: 'white'}}>
         Paye ton Kawa!
       </Text>
-      <View style={{marginTop: 10, display: 'flex', flexDirection: 'column'}}>
+     
+      <View style={{marginTop: 30, display: 'flex', flexDirection: 'column'}}>
         <View
           style={{
             display: 'flex',
@@ -47,7 +53,7 @@ export default function SignupForm({navigation}) {
             width: '100%',
           }}>
           <View style={{width: '49%'}}>
-            <Text style={{marginBottom: 10}}>Prénom</Text>
+            <Text style={{marginBottom: 10, color: 'white'}}>Prénom</Text>
             <TextInput
               style={styles.input}
               name="firstname"
@@ -59,7 +65,7 @@ export default function SignupForm({navigation}) {
             />
           </View>
           <View style={{width: '49%'}}>
-            <Text style={{marginBottom: 10}}>Nom</Text>
+            <Text style={{marginBottom: 10, color: 'white'}}>Nom</Text>
             <TextInput
               style={styles.input}
               name="lastname"
@@ -71,7 +77,7 @@ export default function SignupForm({navigation}) {
             />
           </View>
         </View>
-        <Text style={{marginBottom: 10}}>Email</Text>
+        <Text style={{marginBottom: 10, color: 'white'}}>Email</Text>
         <TextInput
           style={styles.input}
           name="mail"
@@ -83,7 +89,10 @@ export default function SignupForm({navigation}) {
           testID="mail-input" // Attribut testID ajouté
         />
       </View>
-      <Button testID="submit-button" title={"S'inscrire"} onPress={submitBtn} />
+      <TouchableOpacity onPress={submitBtn} style={styles.appButtonContainer}>
+    <Text style={styles.appButtonText}>S'inscrire</Text>
+  </TouchableOpacity>
+      
       {errorMessage ? (
         <Text
           testID="error-message"
@@ -91,6 +100,7 @@ export default function SignupForm({navigation}) {
           {errorMessage}
         </Text>
       ) : null}
+      </View>
     </View>
   );
 }
@@ -103,4 +113,25 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 5,
   },
+  img: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    width: 150,
+    height: 150
+  },
+  appButtonContainer: {
+    elevation: 8,
+    backgroundColor: "#E8801E",
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    marginTop: 30
+  },
+  appButtonText: {
+    fontSize: 18,
+    color: "#fff",
+    fontWeight: "bold",
+    alignSelf: "center",
+    textTransform: "uppercase"
+  }
 });

@@ -13,9 +13,13 @@ const App = () => {
     <NavigationContainer>
        <Stack.Navigator initialRouteName="Home">
         <Stack.Screen  name="Home" component={SignupForm} options={{headerShown: false}} />
-        <Stack.Screen  name="Product" component={ProductScreen} options={{title: 'Produits'}}/>
+        <Stack.Screen  name="Product" component={ProductScreen} options={{title: 'Liste des articles', headerStyle: {backgroundColor: '#5C4F2D'}, headerTitleStyle: {
+            color: 'white',
+          },}}/>
         <Stack.Screen  name="QrCode" component={QrCode} options={{headerShown: false}}/>
-        <Stack.Screen  name="Details" component={ProductDetails} options={{title: 'Informations du produit'}}/>
+        <Stack.Screen  name="Details" component={ProductDetails} options={{title: 'Informations du produit', headerStyle: {backgroundColor: '#5C4F2D'}, headerTitleStyle: {
+            color: 'white',
+          },}}/>
         <Stack.Screen  name="AR" component={ARProduct} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>

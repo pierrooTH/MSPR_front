@@ -58,7 +58,7 @@ describe('<SignupForm />', () => {
     fireEvent.press(submitButton);
 
     await expect(axios.post).toHaveBeenCalledWith(
-      'http://192.168.1.15:4000/users',
+      'http://192.168.1.14:4000/users',
       {
         email: 'john.doe@example.com',
         firstname: 'John',

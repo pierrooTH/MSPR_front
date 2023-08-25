@@ -20,7 +20,7 @@ export default function QrCode({navigation, route}) {
   const handleBarCodeScanned = ({type, data}) => {
     setScanned(true);
     axios
-      .post('http://192.168.1.15:4000/auth', {email: email, token: data})
+      .post('http://192.168.1.14:4000/auth', {email: email, token: data})
       .then(res => {
         if (res.status === 201) {
           navigation.navigate('Product', {token: data, email: email});

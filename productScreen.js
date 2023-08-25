@@ -1,5 +1,5 @@
-import {View, Text, ScrollView, Button} from 'react-native';
-import React, {useEffect, useState, FlatList, TouchableOpacity} from 'react';
+import {View, Text, ScrollView, Button, StyleSheet, TouchableOpacity} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 
 export default function ProductScreen({route, navigation}) {
@@ -8,7 +8,7 @@ export default function ProductScreen({route, navigation}) {
 
   const productData = async () => {
     try {
-      const response = await axios.get('http://192.168.1.15:4000/products', {
+      const response = await axios.get('http://192.168.1.14:4000/products', {
         headers: {
           token: token,
           'Cache-Control': 'no-cache',
@@ -30,15 +30,6 @@ export default function ProductScreen({route, navigation}) {
     productData();
   }, []);
 
-  const Item = ({name, details, id, stock}) => (
-    <View>
-      <Text>{name}</Text>
-      <Text>{details.price}</Text>
-      <Text>{details.description}</Text>
-      <Text>{stock}</Text>
-    </View>
-  );
-
   const dataPr =
     dataProduct.length > 0
       ? dataProduct.map(d => {
@@ -46,7 +37,7 @@ export default function ProductScreen({route, navigation}) {
             <View
               style={{
                 backgroundColor: '#fff',
-                borderRadius: 5,
+                borderRadius: 10,
                 margin: 10,
                 padding: 20,
               }}
@@ -69,17 +60,16 @@ export default function ProductScreen({route, navigation}) {
               <Text style={{lineHeight: 20, fontSize: 20}}>
                 {d.price.split('.')[0]}$
               </Text>
-              <Button
-                title="GO"
-                onPress={() =>
+              <TouchableOpacity onPress={() =>
                   navigation.navigate('Details', {
                     name: d.name,
                     id: d.id,
                     description: d.description,
                     stock: d.stock,
                     price: d.price,
-                  })
-                }></Button>
+                  })} style={styles.appButtonContainer}>
+                <Text style={styles.appButtonText}>GO</Text>
+              </TouchableOpacity>
             </View>
           );
         })
@@ -99,4 +89,23 @@ export default function ProductScreen({route, navigation}) {
       </View>
     );
   }
-}
+};
+
+const styles = StyleSheet.create({
+  appButtonContainer: {
+    elevation: 8,
+    backgroundColor: "#E8801E",
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    marginTop: 30
+  },
+  appButtonText: {
+    fontSize: 18,
+    color: "#fff",
+    fontWeight: "bold",
+    alignSelf: "center",
+    textTransform: "uppercase"
+  }
+});
+
