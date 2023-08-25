@@ -1,9 +1,7 @@
 import React from 'react';
 import {render, fireEvent} from '@testing-library/react-native';
-import SignupForm from './signupForm';
+import SignupForm from '../signupForm';
 import axios from 'axios';
-import {createNativeStackNavigator} from 'react-native-screens/native-stack';
-import {NavigationContainer} from '@react-navigation/native';
 
 // Mock axios.post pour simuler une requête réussie
 jest.mock('axios');

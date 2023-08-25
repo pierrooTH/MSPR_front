@@ -2,8 +2,8 @@ import {
   View,
   Text,
   ScrollView,
-  Button,
   StyleSheet,
+  Alert,
   TouchableOpacity,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
@@ -11,7 +11,7 @@ import axios from 'axios';
 
 export default function ProductScreen({route, navigation}) {
   const [dataProduct, setDataProduct] = useState([]);
-  const {token, email} = route.params;
+  const {token} = route.params;
 
   const productData = async () => {
     try {
@@ -29,7 +29,7 @@ export default function ProductScreen({route, navigation}) {
         setDataProduct([]);
       }
     } catch (error) {
-      alert(error);
+      Alert.alert(error);
     }
   };
 
@@ -48,6 +48,7 @@ export default function ProductScreen({route, navigation}) {
                 margin: 10,
                 padding: 20,
               }}
+              testID={`product-name-${d.id}`}
               key={d.id}>
               <Text
                 style={{
@@ -87,14 +88,14 @@ export default function ProductScreen({route, navigation}) {
 
   if (dataProduct.length > 0) {
     return (
-      <View>
+      <View testID="product-screen">
         {/* <Text>{token}</Text> */}
         <ScrollView>{dataPr}</ScrollView>
       </View>
     );
   } else {
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1}} testID="product-screen">
         <Text>Chargement...</Text>
       </View>
     );

@@ -24,6 +24,8 @@ export default function QrCode({navigation, route}) {
       .then(res => {
         if (res.status === 201) {
           navigation.navigate('Product', {token: data, email: email});
+        } else {
+          navigation.navigate('Home');
         }
       })
       .catch(e => Alert.alert(e.message));
@@ -36,7 +38,7 @@ export default function QrCode({navigation, route}) {
     return <Text>No access to camera</Text>;
   }
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1}} testID="qrcode-component">
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
