@@ -104,7 +104,10 @@ export default function SignupForm({navigation}) {
             testID="mail-input" // Attribut testID ajouté
           />
         </View>
-        <TouchableOpacity onPress={submitBtn} style={styles.appButtonContainer}>
+        <TouchableOpacity
+          onPress={submitBtn}
+          style={styles.appButtonContainer}
+          testID="submit-button">
           <Text style={styles.appButtonText}>S'inscrire</Text>
         </TouchableOpacity>
 

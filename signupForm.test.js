@@ -12,7 +12,7 @@ describe('<SignupForm />', () => {
   it('has 1 child', () => {
     const {toJSON} = render(<SignupForm />);
     const tree = toJSON();
-    expect(tree.children.length).toBe(3);
+    expect(tree.children.length).toBe(1);
   });
 
   it('input fields are empty by default', () => {
