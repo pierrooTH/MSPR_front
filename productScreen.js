@@ -12,7 +12,7 @@ import axios from 'axios';
 export default function ProductScreen({route, navigation}) {
   const [dataProduct, setDataProduct] = useState([]);
   const {token, email} = route.params;
-
+  
   const productData = async () => {
     try {
       const response = await axios.get('http://192.168.1.15:4000/products', {
@@ -68,8 +68,8 @@ export default function ProductScreen({route, navigation}) {
                 {d.price.split('.')[0]}$
               </Text>
               <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate('Details', {
+                onPress={() => 
+                       navigation.navigate('Details', {
                     name: d.name,
                     id: d.id,
                     description: d.description,
