@@ -1,4 +1,11 @@
-import {View, Text, ScrollView, Button, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  Button,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 
@@ -8,7 +15,7 @@ export default function ProductScreen({route, navigation}) {
 
   const productData = async () => {
     try {
-      const response = await axios.get('http://192.168.1.14:4000/products', {
+      const response = await axios.get('http://192.168.1.15:4000/products', {
         headers: {
           token: token,
           'Cache-Control': 'no-cache',
@@ -60,14 +67,17 @@ export default function ProductScreen({route, navigation}) {
               <Text style={{lineHeight: 20, fontSize: 20}}>
                 {d.price.split('.')[0]}$
               </Text>
-              <TouchableOpacity onPress={() =>
+              <TouchableOpacity
+                onPress={() =>
                   navigation.navigate('Details', {
                     name: d.name,
                     id: d.id,
                     description: d.description,
                     stock: d.stock,
                     price: d.price,
-                  })} style={styles.appButtonContainer}>
+                  })
+                }
+                style={styles.appButtonContainer}>
                 <Text style={styles.appButtonText}>GO</Text>
               </TouchableOpacity>
             </View>
@@ -89,23 +99,22 @@ export default function ProductScreen({route, navigation}) {
       </View>
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
   appButtonContainer: {
     elevation: 8,
-    backgroundColor: "#E8801E",
+    backgroundColor: '#E8801E',
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 12,
-    marginTop: 30
+    marginTop: 30,
   },
   appButtonText: {
     fontSize: 18,
-    color: "#fff",
-    fontWeight: "bold",
-    alignSelf: "center",
-    textTransform: "uppercase"
-  }
+    color: '#fff',
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    textTransform: 'uppercase',
+  },
 });
-

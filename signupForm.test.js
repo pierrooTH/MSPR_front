@@ -12,7 +12,7 @@ describe('<SignupForm />', () => {
   it('has 1 child', () => {
     const {toJSON} = render(<SignupForm />);
     const tree = toJSON();
-    expect(tree.children.length).toBe(3);
+    expect(tree.children.length).toBe(1);
   });
 
   it('input fields are empty by default', () => {
@@ -58,7 +58,7 @@ describe('<SignupForm />', () => {
     fireEvent.press(submitButton);
 
     await expect(axios.post).toHaveBeenCalledWith(
-      'http://192.168.1.14:4000/users',
+      'http://192.168.1.15:4000/users',
       {
         email: 'john.doe@example.com',
         firstname: 'John',
