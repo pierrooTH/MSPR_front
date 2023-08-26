@@ -5,37 +5,51 @@ import {
   Button,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ProductScreen({route, navigation}) {
   const [dataProduct, setDataProduct] = useState([]);
-  const {token, email} = route.params;
   
-  const productData = async () => {
-    try {
-      const response = await axios.get('http://192.168.1.15:4000/products', {
-        headers: {
-          token: token,
-          'Cache-Control': 'no-cache',
-          Pragma: 'no-cache',
-        },
-      });
-      if (response.status === 200) {
-        //alert(response)
-        setDataProduct(response.data);
-      } else {
-        setDataProduct([]);
-      }
-    } catch (error) {
-      alert(error);
+const productData = async () => {
+  try {
+    const value = await AsyncStorage.getItem('token')
+    const response = await axios.get('http://192.168.1.15:4000/products', {
+      headers: {
+        token: value,
+        'Cache-Control': 'no-cache',
+        Pragma: 'no-cache',
+      },
+    });
+    if (response.status === 200) {
+      //alert(response)
+      setDataProduct(response.data);
+    } else {
+      setDataProduct([]);
     }
-  };
+  } catch (error) {
+    Alert.alert(error);
+  }
+};
 
-  useEffect(() => {
-    productData();
-  }, []);
+
+useEffect(() => {
+  productData();
+}, []);
+  
+const removeValue = async () => {
+  try {
+    await AsyncStorage.removeItem('token');
+    navigation.replace('Home');
+  } catch(e) {
+    Alert.alert(e)
+  }
+}
+  
+
 
   const dataPr =
     dataProduct.length > 0
@@ -88,8 +102,15 @@ export default function ProductScreen({route, navigation}) {
   if (dataProduct.length > 0) {
     return (
       <View>
-        {/* <Text>{token}</Text> */}
-        <ScrollView>{dataPr}</ScrollView>
+        <ScrollView>
+          {dataPr}
+          <View>
+            <TouchableOpacity style={{marginBottom: 30, marginLeft: 'auto', marginRight: 'auto', backgroundColor: '#5C4F2D', borderRadius: 10, padding: 10, marginTop: 10, width: '95%'}} onPress={() => removeValue()}>
+             <Text style={styles.appButtonText}>Deconnexion</Text>
+            </TouchableOpacity>
+        </View>
+        </ScrollView>
+        
       </View>
     );
   } else {
@@ -110,6 +131,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     marginTop: 30,
   },
+ 
   appButtonText: {
     fontSize: 18,
     color: '#fff',

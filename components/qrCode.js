@@ -2,11 +2,20 @@ import React, {useState, useEffect} from 'react';
 import {Text, View, StyleSheet, Button, Alert} from 'react-native';
 import {BarCodeScanner} from 'expo-barcode-scanner';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function QrCode({navigation, route}) {
   const {email} = route.params;
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+
+  const storeData = async (value) => {
+    try {
+      await AsyncStorage.setItem('token', value);
+    } catch (e) {
+      Alert.alert(e)
+    }
+  };
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -23,7 +32,8 @@ export default function QrCode({navigation, route}) {
       .post('http://192.168.1.15:4000/auth', {email: email, token: data})
       .then(res => {
         if (res.status === 201) {
-          navigation.navigate('Product', {token: data, email: email});
+          storeData(data)
+          navigation.replace('Product', {token: data});
         }
       })
       .catch(e => Alert.alert(e.message));
