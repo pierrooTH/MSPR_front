@@ -11,4 +11,7 @@ module.exports = {
     'react-native/no-inline-styles': 'off',
     'prettier/prettier': 'off',
   },
+  env: {
+    jest: true,
+  },
 };

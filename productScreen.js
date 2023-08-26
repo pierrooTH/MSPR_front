@@ -3,6 +3,7 @@ import {
   Text,
   ScrollView,
   StyleSheet,
+  Alert,
   TouchableOpacity,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
@@ -33,9 +34,8 @@ export default function ProductScreen({route, navigation}) {
         Alert.alert(error);
       }
     } else {
-      navigation.replace('Home')
+      navigation.replace('Home');
     }
-    
   };
 
   useEffect(() => {

@@ -17,7 +17,7 @@ describe('<SignupForm />', () => {
   });
 
   it('displays error message when submitting without filling all fields', async () => {
-    const {getByTestId, getByText} = render(<SignupForm />);
+    const {getByTestId} = render(<SignupForm />);
     const submitButton = getByTestId('submit-button');
 
     fireEvent.press(submitButton);
@@ -51,7 +51,7 @@ describe('<SignupForm />', () => {
   });
 
   it('displays error message on unsuccessful submission', async () => {
-    const {getByTestId, getByText} = render(
+    const {getByTestId} = render(
       <SignupForm navigation={{navigate: jest.fn()}} />,
     );
     const firstnameInput = getByTestId('firstname-input');
