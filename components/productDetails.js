@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
     marginRight: 'auto',
     width: '100%',
-    height: 300,
+    height: 400,
     marginBottom: 15,
   },
   title: {
