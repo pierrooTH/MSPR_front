@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignupForm from './signupForm';
@@ -12,7 +12,7 @@ const App = () => {
     
   return (
     <NavigationContainer>
-       <Stack.Navigator>
+       <Stack.Navigator initialRouteName='Product'>
         <Stack.Screen  name="Home" component={SignupForm} options={{headerShown: false}} />
         <Stack.Screen  name="QrCode" component={QrCode} options={{headerShown: false}}/>
         <Stack.Screen  name="Product" component={ProductScreen} options={{title: 'Liste des articles', headerStyle: {backgroundColor: '#5C4F2D'}, headerTitleStyle: {

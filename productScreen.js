@@ -3,7 +3,6 @@ import {
   Text,
   ScrollView,
   StyleSheet,
-  Alert,
   TouchableOpacity,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
@@ -14,24 +13,29 @@ export default function ProductScreen({route, navigation}) {
   const [dataProduct, setDataProduct] = useState([]);
 
   const productData = async () => {
-    try {
-      const value = await AsyncStorage.getItem('token');
-      const response = await axios.get('http://192.168.1.15:4000/products', {
-        headers: {
-          token: value,
-          'Cache-Control': 'no-cache',
-          Pragma: 'no-cache',
-        },
-      });
-      if (response.status === 200) {
-        //alert(response)
-        setDataProduct(response.data);
-      } else {
-        setDataProduct([]);
+    const value = await AsyncStorage.getItem('token');
+    if (value !== null) {
+      try {
+        const response = await axios.get('http://192.168.1.15:4000/products', {
+          headers: {
+            token: value,
+            'Cache-Control': 'no-cache',
+            Pragma: 'no-cache',
+          },
+        });
+        if (response.status === 200) {
+          //alert(response)
+          setDataProduct(response.data);
+        } else {
+          setDataProduct([]);
+        }
+      } catch (error) {
+        Alert.alert(error);
       }
-    } catch (error) {
-      Alert.alert(error);
+    } else {
+      navigation.replace('Home')
     }
+    
   };
 
   useEffect(() => {
