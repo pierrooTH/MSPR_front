@@ -10,11 +10,19 @@ export default function App({ route }: any) {
   const ref = React.useRef() as React.MutableRefObject<ArViewerView>;
 
   const loadPath = async () => {
-    const modelSrc =
-      Platform.OS === 'android'
-        ? 'https://github.com/riderodd/react-native-ar/blob/main/example/src/dice.glb?raw=true' :
-        ar ? ar 
-        : 'https://github.com/pierrooTH/MSPR_front/raw/develop/3DModels2/Coffee_Maker-3.usdz';
+    // const modelSrc =
+    //   Platform.OS === 'android'
+    //     ? 'https://github.com/riderodd/react-native-ar/blob/main/example/src/dice.glb?raw=true' :
+    //     ar ? ar
+    //     : 'https://github.com/pierrooTH/MSPR_front/raw/develop/3DModels2/Coffee_Maker-3.usdz';
+    let modelSrc;
+    if (Platform.OS === 'android'){
+      modelSrc = 'https://github.com/riderodd/react-native-ar/blob/main/example/src/dice.glb?raw=true';
+    } else if (ar){
+      modelSrc = ar;
+    } else {
+      modelSrc = 'https://github.com/pierrooTH/MSPR_front/raw/develop/3DModels2/Coffee_Maker-3.usdz';
+    }
     const modelPath = `${RNFS.DocumentDirectoryPath}/${ getFileName(modelSrc) }.${
       Platform.OS === 'android' ? 'glb' : 'usdz'
     }`;

@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 
 export default function ProductDetails({route, navigation}) {
