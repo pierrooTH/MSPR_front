@@ -5,11 +5,10 @@ import {
   StyleSheet,
   Alert,
   TouchableOpacity,
-  Alert,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function ProductScreen({route, navigation}) {
   const [dataProduct, setDataProduct] = useState([]);
@@ -47,7 +46,7 @@ export default function ProductScreen({route, navigation}) {
       Alert.alert(e);
     }
   };
-
+  console.log(dataProduct);
   const dataPr =
     dataProduct.length > 0
       ? dataProduct.map(d => {
@@ -59,8 +58,8 @@ export default function ProductScreen({route, navigation}) {
                 margin: 10,
                 padding: 20,
               }}
-              testID={`product-name-${d.id}`}
-              key={d.id}>
+              testID={`product-name-${d.product_detail.id}`}
+              key={d.product_detail.id}>
               <Text
                 style={{
                   lineHeight: 20,
@@ -71,22 +70,22 @@ export default function ProductScreen({route, navigation}) {
                 {d.name}
               </Text>
               <Text style={{lineHeight: 20, marginBottom: 10}}>
-                {d.description}
+                {d.product_detail.description}
               </Text>
               <Text style={{lineHeight: 20, marginBottom: 10}}>
                 {d.stock} products in stock
               </Text>
               <Text style={{lineHeight: 20, fontSize: 20}}>
-                {d.price.split('.')[0]}$
+                {d.product_detail.price}$
               </Text>
               <TouchableOpacity
                 onPress={() =>
                   navigation.navigate('Details', {
                     name: d.name,
-                    id: d.id,
-                    description: d.description,
+                    id: d.product_detail.id,
+                    description: d.product_detail.description,
                     stock: d.stock,
-                    price: d.price,
+                    price: d.product_detail.price,
                   })
                 }
                 style={styles.appButtonContainer}>

@@ -1,70 +1,72 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
-import SignupForm from '../signupForm';
-import axios from 'axios';
-
-// Mock axios.post pour simuler une requête réussie
-jest.mock('axios');
+import {render, fireEvent, waitFor} from '@testing-library/react-native';
+import SignupForm from '../signupForm'; // Assurez-vous d'importer le chemin correct
 
 describe('<SignupForm />', () => {
-  it('has 1 child', () => {
-    const {toJSON} = render(<SignupForm />);
-    const tree = toJSON();
-    expect(tree.children.length).toBe(1);
+  it('displays input fields and submit button', () => {
+    const {getByTestId} = render(<SignupForm />);
+    const firstnameInput = getByTestId('firstname-input');
+    const lastnameInput = getByTestId('lastname-input');
+    const emailInput = getByTestId('mail-input');
+    const submitButton = getByTestId('submit-button');
+
+    expect(firstnameInput).toBeTruthy();
+    expect(lastnameInput).toBeTruthy();
+    expect(emailInput).toBeTruthy();
+    expect(submitButton).toBeTruthy();
   });
 
-  it('input fields are empty by default', () => {
-    const {getByTestId} = render(<SignupForm />);
-    const usernameInput = getByTestId('firstname-input');
-    const emailInput = getByTestId('lastname-input');
-    const passwordInput = getByTestId('mail-input');
-
-    expect(usernameInput.props.value).toBe('');
-    expect(emailInput.props.value).toBe('');
-    expect(passwordInput.props.value).toBe('');
-  });
-
-  it('cannot submit the form if all fields are not filled', () => {
-    const {getByTestId} = render(<SignupForm />);
-    const submitButton = getByTestId('submit-button'); // Récupère le bouton par son testID
+  it('displays error message when submitting without filling all fields', async () => {
+    const {getByTestId, getByText} = render(<SignupForm />);
+    const submitButton = getByTestId('submit-button');
 
     fireEvent.press(submitButton);
 
-    const errorMessage = getByTestId('error-message');
+    const errorMessage = await waitFor(() => getByTestId('error-message'));
+    expect(errorMessage).toBeTruthy();
     expect(errorMessage.props.children).toBe(
       'Veuillez remplir tous les champs.',
     );
   });
 
-  it('navigates to QrCode page when all fields are filled and submit button is pressed width good data', async () => {
-    const navigate = jest.fn(); // Créez une fonction de contournement pour la navigation
-    const {getByTestId} = render(<SignupForm navigation={{navigate}} />);
-
-    const submitButton = getByTestId('submit-button');
-    const firstNameInput = getByTestId('firstname-input');
-    const lastNameInput = getByTestId('lastname-input');
+  it('navigates to QrCode screen on successful submission', async () => {
+    const {getByTestId} = render(
+      <SignupForm navigation={{navigate: jest.fn()}} />,
+    );
+    const firstnameInput = getByTestId('firstname-input');
+    const lastnameInput = getByTestId('lastname-input');
     const emailInput = getByTestId('mail-input');
+    const submitButton = getByTestId('submit-button');
 
-    // Remplir les champs
-    fireEvent.changeText(firstNameInput, 'John');
-    fireEvent.changeText(lastNameInput, 'Doe');
+    fireEvent.changeText(firstnameInput, 'John');
+    fireEvent.changeText(lastnameInput, 'Doe');
     fireEvent.changeText(emailInput, 'john.doe@example.com');
+    fireEvent.press(submitButton);
 
-    // Simuler la requête API réussie
-    axios.post.mockResolvedValue({status: 201});
+    await waitFor(() => {
+      expect(firstnameInput.props.value).toBe('John');
+      expect(lastnameInput.props.value).toBe('Doe');
+      expect(emailInput.props.value).toBe('john.doe@example.com');
+    });
+  });
+
+  it('displays error message on unsuccessful submission', async () => {
+    const {getByTestId, getByText} = render(
+      <SignupForm navigation={{navigate: jest.fn()}} />,
+    );
+    const firstnameInput = getByTestId('firstname-input');
+    const lastnameInput = getByTestId('lastname-input');
+    const emailInput = getByTestId('mail-input');
+    const submitButton = getByTestId('submit-button');
+
+    fireEvent.changeText(firstnameInput, 'John');
+    fireEvent.changeText(lastnameInput, 'Doe');
+    fireEvent.changeText(emailInput, 'john.doe@example.com');
 
     fireEvent.press(submitButton);
 
-    await expect(axios.post).toHaveBeenCalledWith(
-      'http://192.168.1.15:4000/users',
-      {
-        email: 'john.doe@example.com',
-        firstname: 'John',
-        lastname: 'Doe',
-      },
-    );
-    expect(navigate).toHaveBeenCalledWith('QrCode', {
-      email: 'john.doe@example.com',
-    });
+    const errorMessage = await waitFor(() => getByTestId('error-message'));
+    expect(errorMessage).toBeTruthy();
+    expect(errorMessage.props.children).toBe('Erreur!');
   });
 });

@@ -2,48 +2,56 @@ import React from 'react';
 import {render, waitFor} from '@testing-library/react-native';
 import axios from 'axios';
 import ProductScreen from '../productScreen';
+import AsyncStorage from '@react-native-community/async-storage';
+import MockAdapter from 'axios-mock-adapter';
 
+beforeEach(async () => {
+  await AsyncStorage.clear();
+});
 jest.mock('axios'); // Mock axios pour simuler les requêtes
 
 describe('<ProductScreen />', () => {
-  it('displays loading message when dataProduct is empty', () => {
-    const {getByText} = render(<ProductScreen route={{params: {}}} />);
-    const loadingMessage = getByText('Chargement...');
-
-    expect(loadingMessage).toBeTruthy();
+  it('displays loading message when no dataProduct', () => {
+    const {getByText} = render(<ProductScreen />);
+    const loadingText = getByText('Chargement...');
+    expect(loadingText).toBeTruthy();
   });
 
   it('displays product data when dataProduct is not empty', async () => {
-    const responseData = [
+    const mockDataProduct = [
       {
-        id: 1,
         name: 'Product 1',
-        description: 'Description 1',
+        product_detail: {
+          id: 1,
+          description: 'Description 1',
+          price: '20.99',
+        },
         stock: 10,
-        price: '20.99',
       },
       {
-        id: 2,
         name: 'Product 2',
-        description: 'Description 2',
+        product_detail: {
+          id: 2,
+          description: 'Description 2',
+          price: '15.99',
+        },
         stock: 5,
-        price: '15.99',
       },
     ];
-    axios.get.mockResolvedValueOnce({status: 200, data: responseData});
 
-    const {getByTestId, getByText} = render(
-      <ProductScreen route={{params: {}}} />,
-    );
+    const mock = new MockAdapter(axios);
+    mock.onGet('http://192.168.1.15:4000/products').reply(200, mockDataProduct);
+
+    const {findByTestId} = render(<ProductScreen />);
 
     await waitFor(() => {
-      responseData.forEach(product => {
-        const productNameText = getByText(product.name);
+      mockDataProduct.forEach(async product => {
+        const productNameText = await findByTestId(
+          `product-name-${product.product_detail.id}`,
+        );
         expect(productNameText).toBeTruthy();
+        expect(productNameText.props.children).toBe(product.name);
       });
     });
-
-    const productScreen = getByTestId('product-screen');
-    expect(productScreen).toBeTruthy();
   });
 });

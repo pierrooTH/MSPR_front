@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function SignupForm({navigation}) {
   const [email, setEmail] = useState('');
@@ -19,19 +19,18 @@ export default function SignupForm({navigation}) {
 
   const getData = async () => {
     try {
-        const value = await AsyncStorage.getItem('token')
-        if(value !== null) {
-            navigation.replace('Product')
-        }
-    } catch(e) {
-        // error reading value
+      const value = await AsyncStorage.getItem('token');
+      if (value !== null) {
+        navigation.replace('Product');
+      }
+    } catch (e) {
+      // error reading value
     }
-}
+  };
 
-useEffect(()=> {
-    getData()
-        .catch(console.error);
-}, [])
+  useEffect(() => {
+    getData().catch(console.error);
+  }, []);
 
   const submitBtn = async () => {
     try {
@@ -53,7 +52,7 @@ useEffect(()=> {
         Alert.alert('Erreur!');
       }
     } catch (e) {
-      setErrorMessage(e.message); // Gérer les erreurs de manière appropriée
+      setErrorMessage('Erreur!'); // Gérer les erreurs de manière appropriée
       // Alert.alert(e.message);
     }
   };
