@@ -9,14 +9,15 @@ import ARProduct from './components/ARProduct';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+    
   return (
     <NavigationContainer>
-       <Stack.Navigator initialRouteName="Home">
+       <Stack.Navigator>
         <Stack.Screen  name="Home" component={SignupForm} options={{headerShown: false}} />
+        <Stack.Screen  name="QrCode" component={QrCode} options={{headerShown: false}}/>
         <Stack.Screen  name="Product" component={ProductScreen} options={{title: 'Liste des articles', headerStyle: {backgroundColor: '#5C4F2D'}, headerTitleStyle: {
             color: 'white',
           },}}/>
-        <Stack.Screen  name="QrCode" component={QrCode} options={{headerShown: false}}/>
         <Stack.Screen  name="Details" component={ProductDetails} options={{title: 'Informations du produit', headerStyle: {backgroundColor: '#5C4F2D'}, headerTitleStyle: {
             color: 'white',
           },}}/>
