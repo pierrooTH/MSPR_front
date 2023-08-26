@@ -3,18 +3,20 @@ import {StyleSheet, View, Platform} from 'react-native';
 import {ArViewerView} from 'react-native-ar-viewer';
 import RNFS from 'react-native-fs';
 
-export default function App() {
-  const [localModelPath, setLocalModelPath] = React.useState<string | undefined>();
+export default function App({ route }: any) {
+  const {ar} = route.params;
+  const [localModelPath, setLocalModelPath] = React.useState<string>();
   const [showArView] = React.useState(true);
-  const ref = React.useRef<ArViewerView>(null);
+  const ref = React.useRef() as React.MutableRefObject<ArViewerView>;
 
   const loadPath = async () => {
     const modelSrc =
       Platform.OS === 'android'
-        ? 'https://github.com/riderodd/react-native-ar/blob/main/example/src/dice.glb?raw=true'
-        : 'https://github.com/pierrooTH/MSPR_front/raw/develop/3DModels/Cafetiere1.usdc';
+        ? 'https://github.com/riderodd/react-native-ar/blob/main/example/src/dice.glb?raw=true' :
+        ar ? ar 
+        : 'https://github.com/pierrooTH/MSPR_front/raw/develop/3DModels2/Coffee_Maker-3.usdz';
     const modelPath = `${RNFS.DocumentDirectoryPath}/${ getFileName(modelSrc) }.${
-      Platform.OS === 'android' ? 'glb' : 'usdc'
+      Platform.OS === 'android' ? 'glb' : 'usdz'
     }`;
     const exists = await RNFS.exists(modelPath);
     console.log(modelPath);
@@ -45,7 +47,7 @@ export default function App() {
           model={localModelPath}
           style={styles.arView}
           disableInstantPlacement
-          manageDepth
+          lightEstimation
           allowRotate
           allowScale
           allowTranslate

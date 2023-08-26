@@ -1,16 +1,56 @@
-import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
 
 export default function ProductDetails({route, navigation}) {
-  const {name, price, description, stock} = route.params;
+  const {name, id, price, description, stock} = route.params;
+  const [ar, setAr] = useState('');
+
+  const changeArModel = useCallback(() => {
+    id === 1
+      ? setAr(
+          'https://github.com/pierrooTH/MSPR_front/raw/develop/3DModels2/Coffee_Maker-3.usdz',
+        )
+      : id === 2
+      ? setAr(
+          'https://github.com/pierrooTH/MSPR_front/raw/develop/3DModels2/Coffee_Maker_Low_Poly-2.usdz',
+        )
+      : setAr(
+          'https://github.com/pierrooTH/MSPR_front/raw/develop/3DModels2/Coffee_Maker-2.usdz',
+        );
+  }, [id]);
+
+  useEffect(() => {
+    changeArModel();
+  }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={{flex: 1, padding: 20}}>
       <Image
         style={styles.img}
-        source={require('../assets/coffee-machine-image.png')}
+        source={
+          id === 1
+            ? require('../assets/coffee_maker_3.png')
+            : id === 2
+            ? require('../assets/coffee_low_poly.png')
+            : require('../assets/coffee_maker2.png')
+        }
       />
-      <Text style={styles.title}>{name}</Text>
+      <Text
+        style={{
+          lineHeight: 20,
+          fontWeight: 'bold',
+          fontSize: 20,
+          marginBottom: 10,
+        }}>
+        {name}
+      </Text>
 
       <View style={styles.descriptionContainer}>
         <Text style={styles.descriptionTitle}>Product description :</Text>
@@ -23,7 +63,7 @@ export default function ProductDetails({route, navigation}) {
       </View>
 
       <TouchableOpacity
-        onPress={() => navigation.navigate('AR')}
+        onPress={() => navigation.navigate('AR', {ar: ar})}
         style={styles.appButtonContainer}>
         <Text style={styles.appButtonText}>Product AR</Text>
       </TouchableOpacity>
