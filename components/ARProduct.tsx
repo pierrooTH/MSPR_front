@@ -16,9 +16,7 @@ export default function App({ route }: any) {
     //     ar ? ar
     //     : 'https://github.com/pierrooTH/MSPR_front/raw/develop/3DModels2/Coffee_Maker-3.usdz';
     let modelSrc;
-    if (Platform.OS === 'android'){
-      modelSrc = 'https://github.com/riderodd/react-native-ar/blob/main/example/src/dice.glb?raw=true';
-    } else if (ar){
+    if (ar){
       modelSrc = ar;
     } else {
       modelSrc = 'https://github.com/pierrooTH/MSPR_front/raw/develop/3DModels2/Coffee_Maker-3.usdz';

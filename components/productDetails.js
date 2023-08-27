@@ -1,4 +1,11 @@
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Platform,
+} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 
 export default function ProductDetails({route, navigation}) {
@@ -6,17 +13,48 @@ export default function ProductDetails({route, navigation}) {
   const [ar, setAr] = useState('');
 
   const changeArModel = useCallback(() => {
-    id === 1
-      ? setAr(
+    // id === 1
+    //   ? setAr(
+    //       'https://github.com/pierrooTH/MSPR_front/raw/develop/3DModels2/Coffee_Maker-3.usdz',
+    //     )
+    //   : id === 2
+    //   ? setAr(
+    //       'https://github.com/pierrooTH/MSPR_front/raw/develop/3DModels2/Coffee_Maker_Low_Poly-2.usdz',
+    //     )
+    //   : setAr(
+    //       'https://github.com/pierrooTH/MSPR_front/raw/develop/3DModels2/Coffee_Maker-2.usdz',
+    //     );
+    if (id === 1) {
+      if (Platform.OS === 'android') {
+        setAr(
+          'https://github.com/pierrooTH/MSPR_front/raw/develop/3DModels2/Coffee_Maker-3.glb',
+        );
+      } else {
+        setAr(
           'https://github.com/pierrooTH/MSPR_front/raw/develop/3DModels2/Coffee_Maker-3.usdz',
-        )
-      : id === 2
-      ? setAr(
+        );
+      }
+    } else if (id === 2) {
+      if (Platform.OS === 'android') {
+        setAr(
+          'https://github.com/pierrooTH/MSPR_front/raw/develop/3DModels2/coffee_maker_low_poly.glb',
+        );
+      } else {
+        setAr(
           'https://github.com/pierrooTH/MSPR_front/raw/develop/3DModels2/Coffee_Maker_Low_Poly-2.usdz',
-        )
-      : setAr(
+        );
+      }
+    } else if (id === 3) {
+      if (Platform.OS === 'android') {
+        setAr(
+          'https://github.com/pierrooTH/MSPR_front/raw/develop/3DModels2/coffee_maker.glb',
+        );
+      } else {
+        setAr(
           'https://github.com/pierrooTH/MSPR_front/raw/develop/3DModels2/Coffee_Maker-2.usdz',
         );
+      }
+    }
   }, [id]);
 
   useEffect(() => {
