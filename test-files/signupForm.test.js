@@ -61,12 +61,14 @@ describe('<SignupForm />', () => {
 
     fireEvent.changeText(firstnameInput, 'John');
     fireEvent.changeText(lastnameInput, 'Doe');
-    fireEvent.changeText(emailInput, 'john.doe@example.com');
+    fireEvent.changeText(emailInput, '');
 
     fireEvent.press(submitButton);
 
     const errorMessage = await waitFor(() => getByTestId('error-message'));
     expect(errorMessage).toBeTruthy();
-    expect(errorMessage.props.children).toBe('Erreur!');
+    expect(errorMessage.props.children).toBe(
+      'Veuillez remplir tous les champs.',
+    );
   });
 });
