@@ -29,19 +29,10 @@ export default function App({ route }: any) {
     const exists = await RNFS.exists(modelPath);
     console.log(modelPath);
     if (!exists) {
-      try {
-        const downloadResult = await RNFS.downloadFile({
-          fromUrl: modelSrc,
-          toFile: modelPath,
-        });
-        if (downloadResult.statusCode === 200) {
-          setLocalModelPath(modelPath);
-        } else {
-          console.error('Failed to download the file.');
-        }
-      } catch (error) {
-        console.error('Error downloading the file:', error);
-      }
+      await RNFS.downloadFile({
+        fromUrl: modelSrc,
+        toFile: modelPath,
+      }).promise;
     }
 
     setLocalModelPath(modelPath);
