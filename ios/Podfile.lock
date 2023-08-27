@@ -11,18 +11,18 @@ PODS:
     - ZXingObjC/PDF417
   - EXConstants (14.4.2):
     - ExpoModulesCore
-  - EXFileSystem (15.4.2):
+  - EXFileSystem (15.4.3):
     - ExpoModulesCore
   - EXFont (11.4.0):
     - ExpoModulesCore
   - EXImageLoader (4.3.0):
     - ExpoModulesCore
     - React-Core
-  - Expo (49.0.5):
+  - Expo (49.0.8):
     - ExpoModulesCore
   - ExpoKeepAwake (12.3.0):
     - ExpoModulesCore
-  - ExpoModulesCore (1.5.8):
+  - ExpoModulesCore (1.5.10):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
     - React-RCTAppDelegate
@@ -411,7 +411,7 @@ PODS:
     - React-Core
   - RNFS (2.20.0):
     - React-Core
-  - RNScreens (3.22.1):
+  - RNScreens (3.24.0):
     - React-Core
     - React-RCTImage
   - SocketRocket (0.6.1)
@@ -623,12 +623,12 @@ SPEC CHECKSUMS:
   EXApplication: 02655a251434d564bb0e73291f5a490c74b5b76f
   EXBarCodeScanner: 44783bf0be375ab18a838dcfef29dd648397000a
   EXConstants: ce5bbea779da8031ac818c36bea41b10e14d04e1
-  EXFileSystem: d7f59869885cfeab3ac771e2a8d0f5ed98cd3fdb
+  EXFileSystem: 941b273758aee14be2ecc671dacb4f10dd28c833
   EXFont: 738c44c390953ebcbab075a4848bfbef025fd9ee
   EXImageLoader: 34b214f9387e98f3c73989f15d8d5b399c9ab3f7
-  Expo: f2485e8fab9988e5dcee34159df5e475c9c3730c
+  Expo: 900dc423a0e2c7e822b2c683a89426e82695fb27
   ExpoKeepAwake: be4cbd52d9b177cde0fd66daa1913afa3161fc1d
-  ExpoModulesCore: bee019333b216be6d5bf997ac9ba7f1fb0767b82
+  ExpoModulesCore: a27b4c5914416b5598369b54f6bff5f0d06a9c21
   FBLazyVector: ad72713385db5289b19f1ead07e8e4aa26dcb01d
   FBReactNativeSpec: df2602c11e33d310433496e28a48b4b2be652a61
   Flipper: 26fc4b7382499f1281eb8cb921e5c3ad6de91fe0
@@ -676,7 +676,7 @@ SPEC CHECKSUMS:
   ReactCommon: 03be76588338a27a88d103b35c3c44a3fd43d136
   RNCAsyncStorage: c913ede1fa163a71cea118ed4670bbaaa4b511bb
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
-  RNScreens: 50ffe2fa2342eabb2d0afbe19f7c1af286bc7fb3
+  RNScreens: b21dc57dfa2b710c30ec600786a3fc223b1b92e7
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 921eb014669cf9c718ada68b08d362517d564e0c
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
