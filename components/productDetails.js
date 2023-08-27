@@ -26,6 +26,7 @@ export default function ProductDetails({route, navigation}) {
   return (
     <View style={{flex: 1, padding: 20}}>
       <Image
+        testID="product-details-image"
         style={styles.img}
         source={
           id === 1

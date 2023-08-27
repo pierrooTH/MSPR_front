@@ -29,10 +29,19 @@ export default function App({ route }: any) {
     const exists = await RNFS.exists(modelPath);
     console.log(modelPath);
     if (!exists) {
-      await RNFS.downloadFile({
-        fromUrl: modelSrc,
-        toFile: modelPath,
-      }).promise;
+      try {
+        const downloadResult = await RNFS.downloadFile({
+          fromUrl: modelSrc,
+          toFile: modelPath,
+        });
+        if (downloadResult.statusCode === 200) {
+          setLocalModelPath(modelPath);
+        } else {
+          console.error('Failed to download the file.');
+        }
+      } catch (error) {
+        console.error('Error downloading the file:', error);
+      }
     }
 
     setLocalModelPath(modelPath);
@@ -49,7 +58,7 @@ export default function App({ route }: any) {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="ar-viewer">
       {localModelPath && showArView && (
         <ArViewerView
           model={localModelPath}

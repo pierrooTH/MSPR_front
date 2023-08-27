@@ -34,7 +34,9 @@ export default function ProductScreen({route, navigation}) {
         Alert.alert(error);
       }
     } else {
-      navigation.replace('Home');
+      if (navigation) {
+        navigation.replace('Home');
+      }
     }
   };
 

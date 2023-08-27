@@ -20,7 +20,7 @@ export default function SignupForm({navigation}) {
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('token');
-      if (value !== null) {
+      if (value !== null && navigation) {
         navigation.replace('Product');
       }
     } catch (e) {
@@ -46,7 +46,7 @@ export default function SignupForm({navigation}) {
         lastname: lastname,
       });
 
-      if (response.status === 201) {
+      if (response.status === 201 && navigation) {
         navigation.navigate('QrCode', {email: email});
       } else {
         Alert.alert('Erreur!');
