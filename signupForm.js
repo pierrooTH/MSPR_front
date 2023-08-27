@@ -1,10 +1,58 @@
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 
+<<<<<<< Updated upstream
 export default function signupForm() {
     const [email, setEmail] = useState('');
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
+=======
+export default function SignupForm({navigation}) {
+  const [email, setEmail] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [errorMessage, setErrorMessage] = useState(''); // Ajout du state pour le message d'erreur
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('token');
+      if (value !== null && navigation) {
+        navigation.replace('Product');
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
+
+  useEffect(() => {
+    getData().catch(console.error);
+  }, []);
+
+  const submitBtn = async () => {
+    try {
+      if (!email || !firstname || !lastname) {
+        setErrorMessage('Veuillez remplir tous les champs.'); // Afficher le message d'erreur
+        // Alert.alert('Veuillez remplir tous les champs.');
+        return;
+      }
+
+      const response = await axios.post('http://192.168.1.14:4000/users', {
+        email: email,
+        firstname: firstname,
+        lastname: lastname,
+      });
+
+      if (response.status === 201 && navigation) {
+        navigation.navigate('QrCode', {email: email});
+      } else {
+        Alert.alert('Erreur!');
+      }
+    } catch (e) {
+      setErrorMessage('Erreur!'); // Gérer les erreurs de manière appropriée
+      // Alert.alert(e.message);
+    }
+  };
+>>>>>>> Stashed changes
 
   return (
     <View style={{marginTop: 50, padding: 20}}>
